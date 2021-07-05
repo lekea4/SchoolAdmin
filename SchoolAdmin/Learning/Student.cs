@@ -1,5 +1,6 @@
 ﻿using System;
 using SchoolAdmin.LookUp;
+using SchoolAdmin.Facilities;
 namespace SchoolAdmin.Learning
 
 {
@@ -49,5 +50,9 @@ namespace SchoolAdmin.Learning
             Console.WriteLine("I am learning something interesting now.");
         }
 
+        public void ReciveNewBookAlert(object source, BookEventArgs args)
+        {
+            Console.WriteLine($"Send email to students : \nTitle: {args.Title}, \nAuthor{args.Author}, \nTime Added {args.TimeAdded}\n\n");
+        }
     }
 }

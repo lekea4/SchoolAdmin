@@ -1,17 +1,14 @@
-﻿using SchoolAdmin.Learning;
+﻿using SchoolAdmin.Facilities;
+using SchoolAdmin.Learning;
 using SchoolAdmin.LookUp;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolAdmin.Teaching
 {
-    interface ITeacher
+    internal interface ITeacher
     {
-        int StaffId { get;  }
-        
+        int StaffId { get; }
+
         string Name { get; }
 
         SchoolSubject Subject { get; set; }
@@ -19,7 +16,6 @@ namespace SchoolAdmin.Teaching
         List<ILearner> Learners { get; set; }
 
         void Teach();
-
-
+        void ReciveNewBookAlert(object source, BookEventArgs args);
     }
 }

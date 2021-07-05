@@ -1,4 +1,5 @@
-﻿using SchoolAdmin.Learning;
+﻿using SchoolAdmin.Facilities;
+using SchoolAdmin.Learning;
 using SchoolAdmin.LookUp;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,10 @@ namespace SchoolAdmin.Teaching
 {
     public class Teacher : ITeacher
     {
-
         private readonly int _staffId;
         private readonly string _fullName;
         private SchoolSubject _subject;
         private List<ILearner> _learners;
-
 
         public Teacher(int staffId, string fullName)
         {
@@ -20,33 +19,30 @@ namespace SchoolAdmin.Teaching
             _fullName = fullName;
         }
 
-
         public int StaffId
         {
-            get => _staffId;   
+            get => _staffId;
         }
-
 
         public string Name
         {
             get => _fullName;
         }
 
-
         public SchoolSubject Subject
         {
-            // This get accessor uses the explicit syntax, rather than the short form
+            // This get accessors uses the explicit syntax, rather than the short form
 
-            get {
+            get
+            {
                 return _subject;
             }
 
-
-            set {
+            set
+            {
                 _subject = value;
-            } 
+            }
         }
-
 
         public List<ILearner> Learners
         {
@@ -55,11 +51,16 @@ namespace SchoolAdmin.Teaching
                 return _learners;
             }
 
-            set {
+            set
+            {
                 _learners = value;
             }
         }
 
+        public void ReciveNewBookAlert(object source, BookEventArgs args)
+        {
+            Console.WriteLine($"Send email to students : \nTitle: {args.Title}, \nAuthor{args.Author}, \nTime Added {args.TimeAdded}\n\n");
+        }
 
         public void Teach()
         {
