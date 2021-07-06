@@ -75,14 +75,33 @@ namespace SchoolAdmin
             bool isLearner = firstTeacher.Learners.Contains(thirdStudent);
             Console.WriteLine($"The search for Carl John returns: {isLearner}");
 
-            
+            //// Exploring KeyValuePair<TKey, TValue> type
+            //KeyValuePair<int, ILearner> student1, student2, student3;
+            //student1 = new KeyValuePair<int, ILearner>(5, firstStudent);
+            //student2 = new KeyValuePair<int, ILearner>(7, secondStudent);
+            //student3 = new KeyValuePair<int, ILearner>(10, thirdStudent);
 
-            
-                
+            //// Exploring Dictionary<TKey, TValue> type
+            //Dictionary<int, ILearner> studentDictionary;
+            //studentDictionary = new Dictionary<int, ILearner>();
+            //studentDictionary.Add(5, firstStudent);
+            //studentDictionary.Add(7, secondStudent);
+            //studentDictionary.Add(10, thirdStudent);
 
-            
-                
-              
+            //foreach(KeyValuePair<int, ILearner> kvp in studentDictionary)
+            //{
+            //    Console.WriteLine($"Key is {kvp.Key} \t Value is {kvp.Value.Name}");
+            //}
+
+
+
+
+
+
+
+
+
+
         }
     }
 }
