@@ -18,10 +18,10 @@ namespace SchoolAdmin.Teaching
         public SchoolSubject Subject { get; set; }
         public List<ILearner> Learners { get; set; }
 
-        public void ReciveNewBookAlert(object source, BookEventArgs args)
+        /*public void ReciveNewBookAlert(object source, BookEventArgs args)
         {
           
-        }
+        } */
 
         public abstract void Teach();
        

@@ -16,6 +16,6 @@ namespace SchoolAdmin.Teaching
         List<ILearner> Learners { get; set; }
 
         void Teach();
-        void ReciveNewBookAlert(object source, BookEventArgs args);
+       // void ReciveNewBookAlert(object source, BookEventArgs args);
     }
 }

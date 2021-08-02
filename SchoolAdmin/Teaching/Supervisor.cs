@@ -37,9 +37,9 @@ namespace SchoolAdmin.Teaching
         {
         }
 
-        public void ReciveNewBookAlert(object source, BookEventArgs args)
+       /* public void ReciveNewBookAlert(object source, BookEventArgs args)
         {
             
-        }
+        } */
     }
 }

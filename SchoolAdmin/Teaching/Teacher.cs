@@ -57,10 +57,10 @@ namespace SchoolAdmin.Teaching
             }
         }
 
-        public void ReciveNewBookAlert(object source, BookEventArgs args)
-        {
-            Console.WriteLine($"Send email to students : \nTitle: {args.Title}, \nAuthor{args.Author}, \nTime Added {args.TimeAdded}\n\n");
-        }
+        //public void ReciveNewBookAlert(object source, BookEventArgs args)
+        //{
+        //    Console.WriteLine($"Send email to students : \nTitle: {args.Title}, \nAuthor{args.Author}, \nTime Added {args.TimeAdded}\n\n");
+        //}
 
         public void Teach()
         {

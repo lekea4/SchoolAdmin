@@ -11,6 +11,6 @@ namespace SchoolAdmin.Learning
 
         void Learn();
 
-        void ReciveNewBookAlert(object source, BookEventArgs args);
+        //void ReciveNewBookAlert(object source, BookEventArgs args);
     }
 }
