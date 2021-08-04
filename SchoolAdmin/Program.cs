@@ -21,7 +21,7 @@ namespace SchoolAdmin
 
         static void Main(string[] args)
         {
-            
+            DateTime()
 
 
             #region Working on MongoDB services
