@@ -8,6 +8,8 @@ using SchoolAdmin.Facilities;
 using SchoolAdmin.Facilities.SchoolLibrary;
 using SchoolAdmin.MongoDBDemo;
 using MongoDB.Bson;
+using MongoDB.Driver;
+
 
 
 namespace SchoolAdmin
@@ -21,12 +23,16 @@ namespace SchoolAdmin
 
         static void Main(string[] args)
         {
-            
+
 
 
             #region Working on MongoDB services
+
+             
             //instantiate the mongoDBservice class 
             MongoDBService dBService = new MongoDBService();
+
+            #region reading through the database for teachers and students
 
             Console.WriteLine("The available teachers are: ");
 
@@ -36,66 +42,89 @@ namespace SchoolAdmin
                 Console.WriteLine(teacher);
             }
 
-            // dBService.TestConnection(); 
 
-            //Create a Teacher document and insert them in the collection
 
-           /* BsonDocument teacherDoc1 = new BsonDocument()
+
+            Console.WriteLine("The available students are: ");
+
+            var students = dBService.FetchAll("students");
+            foreach (var student in students)
             {
-                {"staff_id", 10001 },
-                {"name", "Chief Adeleke Ayinde"},
-                {"subject", "Physics" }
-            };
+                Console.WriteLine(student);
+            }
+            #endregion
+            // dBService.TestConnection();      //for testing the database connection from visual studio to mongoDB
 
-            BsonDocument teacherDoc2 = new BsonDocument()
-            {
-                {"staff_id", 10002 },
-                {"name", "High Chief Boyowa Odometa"},
-                {"subject", "Mathematics" }
-            };
+            #region  Create a Teacher and student document and inserting them in the collection
 
-            BsonDocument teacherDoc3 = new BsonDocument()
-            {
-                {"staff_id", 10001 },
-                {"name", "Chief Chairman Temiloluwa Tegbe"},
-                {"subject", "Dancing Instructor" }
-            };
+            #region Using InsertMany !IMPORTANT
+            //check later for how to use InsertMany
 
 
-            //creating student document and inserting them in the collection 
+            #endregion
 
-            BsonDocument studentDoc1 = new BsonDocument()
-            {
-                {"reg_number", 50001 },
-                {"full_name","Obi Cubana" },
-                {"subject", "Mathematics" }
-            };
+            /* BsonDocument teacherDoc1 = new BsonDocument()
+              {
+                  {"staff_id", 10001 },
+                  {"name", "Chief Adeleke Ayinde"},
+                  {"subject", "Physics" }
+              };
 
-            BsonDocument studentDoc2 = new BsonDocument()
-            {
-                {"reg_number", 50002 },
-                {"full_name","Nelson Mandela" },
-                {"subject", "Philosophy" }
-            };
+              BsonDocument teacherDoc2 = new BsonDocument()
+              {
+                  {"staff_id", 10002 },
+                  {"name", "High Chief Boyowa Odometa"},
+                  {"subject", "Mathematics" }
+              };
 
-            BsonDocument studentDoc3 = new BsonDocument()
-            {
-                {"reg_number", 50003 },
-                {"full_name","Kola Olaiya" },
-                {"subject", "Physics" }
-            };
-
-            dBService.Insert("teachers", teacherDoc1);
-            dBService.Insert("teachers", teacherDoc2);
-            dBService.Insert("teachers", teacherDoc3);
+              BsonDocument teacherDoc3 = new BsonDocument()
+              {
+                  {"staff_id", 10001 },
+                  {"name", "Chief Chairman Temiloluwa Tegbe"},
+                  {"subject", "Dancing Instructor" }
+              };
 
 
-            dBService.Insert("students", studentDoc1);
-            dBService.Insert("students", studentDoc2);
-            dBService.Insert("students", studentDoc2); */
+              //creating student document and inserting them in the collection 
+
+              BsonDocument studentDoc1 = new BsonDocument()
+              {
+                  {"reg_number", 50001 },
+                  {"full_name","Obi Cubana" },
+                  {"subject", "Mathematics" }
+              };
+
+              BsonDocument studentDoc2 = new BsonDocument()
+              {
+                  {"reg_number", 50002 },
+                  {"full_name","Nelson Mandela" },
+                  {"subject", "Philosophy" }
+              };
+
+              BsonDocument studentDoc3 = new BsonDocument()
+              {
+                  {"reg_number", 50003 },
+                  {"full_name","Kola Olaiya" },
+                  {"subject", "Physics" }
+              };
+
+              dBService.Insert("teachers", teacherDoc1);
+              dBService.Insert("teachers", teacherDoc2);
+              dBService.Insert("teachers", teacherDoc3);
 
 
-#endregion
+
+              dBService.Insert("students", studentDoc1);
+              dBService.Insert("students", studentDoc2);
+              dBService.Insert("students", studentDoc2); */
+
+
+
+
+
+            #endregion
+
+            #endregion
 
 
             #region previuosly worked on
