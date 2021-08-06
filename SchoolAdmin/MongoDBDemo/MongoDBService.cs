@@ -103,6 +103,66 @@ namespace SchoolAdmin.MongoDBDemo
             return result;
         }
 
+        public List<BsonDocument> FetchUsingSort(string collectionName, string dataToSort, string sortOrder)
+        {
+
+            List<BsonDocument> result;
+
+            SortDefinition<BsonDocument> sort;
+
+            switch (sortOrder)
+            {
+                case "combine":
+                    sort = Builders<BsonDocument>.Sort.Combine(dataToSort);
+                    break;
+
+                case "descending":
+
+                    sort = Builders<BsonDocument>.Sort.Descending(dataToSort);
+                    break; 
+
+                default :
+                       
+                       sort = Builders<BsonDocument>.Sort.Ascending(dataToSort); 
+                    break;
+            }
+
+            
+
+
+            switch (collectionName)
+            {
+                case "teachers":
+                    result = teachersCollection.Find(new BsonDocument()).ToList();
+
+                    break;
+
+
+
+                case "students":
+
+                    result = studentsCollection.Find(new BsonDocument()).ToList();
+                    break;
+
+
+
+                default:
+                    result = null;
+                    Console.WriteLine("Invalid collection! Only 'teachers' and 'students' are allowed");
+
+
+
+                    //include error message
+
+
+
+                    break;
+            }
+
+            return result;
+        }
+
+
 
         public List<BsonDocument> FetchWithFilter(string collectionName, KeyValuePair<string, object> filterPair, string comparer)
         {
@@ -135,7 +195,7 @@ namespace SchoolAdmin.MongoDBDemo
             }
 
 
-            //Builders<BsonDocument> 
+          
 
             switch (collectionName)
             {
@@ -156,12 +216,6 @@ namespace SchoolAdmin.MongoDBDemo
                 default:
                     result = null;
                     Console.WriteLine("Invalid collection! Only 'teachers' and 'students' are allowed");
-
-
-
-                    //include error message
-
-
 
                     break;
             }
