@@ -32,9 +32,24 @@ namespace SchoolAdmin
             //instantiate the mongoDBservice class 
             MongoDBService dBService = new MongoDBService();
 
+            #region Using the filter method to fetch data 
+
+            var filterPair = new KeyValuePair<string, object>("staff_id, 10001");
+            var filteredTeachers = dBService.FetchWithFilter("teachers", filterPair, ">");
+
+            Console.WriteLine("The matching teachhers for this query are: ");
+            foreach (var teacher in teachers)
+            {
+                Console.WriteLine(teacher);
+            }
+
+
+
+            #endregion
+
             #region reading through the database for teachers and students
 
-            Console.WriteLine("The available teachers are: ");
+            /*Console.WriteLine("The available teachers are: ");
 
             var teachers = dBService.FetchAll("teachers");
             foreach (var teacher in teachers)
@@ -51,8 +66,23 @@ namespace SchoolAdmin
             foreach (var student in students)
             {
                 Console.WriteLine(student);
-            }
+            } */
             #endregion
+
+
+            //reading through the database with filter 
+
+
+
+            //var filter = Builders<BsonDocument>.Filter.Eq("staff_id", 10001);
+            //var teacherDocument = dBService.FetchAll("teachers");
+            //Console.WriteLine(teacherDocument.ToString());
+
+
+
+
+
+
             // dBService.TestConnection();      //for testing the database connection from visual studio to mongoDB
 
             #region  Create a Teacher and student document and inserting them in the collection
@@ -63,7 +93,7 @@ namespace SchoolAdmin
 
             #endregion
 
-            /* BsonDocument teacherDoc1 = new BsonDocument()
+            BsonDocument teacherDoc1 = new BsonDocument()
               {
                   {"staff_id", 10001 },
                   {"name", "Chief Adeleke Ayinde"},
@@ -116,7 +146,7 @@ namespace SchoolAdmin
 
               dBService.Insert("students", studentDoc1);
               dBService.Insert("students", studentDoc2);
-              dBService.Insert("students", studentDoc2); */
+              dBService.Insert("students", studentDoc2); 
 
 
 

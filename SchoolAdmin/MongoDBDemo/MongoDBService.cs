@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using System.Linq.Expressions;
 
 namespace SchoolAdmin.MongoDBDemo
 {
@@ -14,6 +15,8 @@ namespace SchoolAdmin.MongoDBDemo
 
         IMongoDatabase database;
         IMongoCollection<BsonDocument> teachersCollection, studentsCollection;
+       
+
 
 
         public MongoDBService()
@@ -21,8 +24,15 @@ namespace SchoolAdmin.MongoDBDemo
             mongo  = new MongoClient("mongodb://localhost:27017/school_admin_db");
             database = mongo.GetDatabase("school_admin_db");
             teachersCollection = database.GetCollection<BsonDocument>("teachers");
-            studentsCollection = database.GetCollection<BsonDocument>("students"); 
+            studentsCollection = database.GetCollection<BsonDocument>("students");
+            
+            
+
+            
+
         }
+
+        
 
         public void Insert(string collectionName, BsonDocument dataToInsert)
         {
@@ -66,6 +76,72 @@ namespace SchoolAdmin.MongoDBDemo
                 case "teachers":
                     result = teachersCollection.Find(new BsonDocument()).ToList();
                     
+                    break;
+
+
+
+                case "students":
+
+                    result = studentsCollection.Find(new BsonDocument()).ToList();
+                    break;
+
+
+
+                default:
+                    result = null;
+                    Console.WriteLine("Invalid collection! Only 'teachers' and 'students' are allowed");
+
+
+
+                    //include error message
+
+
+
+                    break;
+            }
+
+            return result;
+        }
+
+
+        public List<BsonDocument> FetchWithFilter(string collectionName, KeyValuePair<string, object> filterPair, string comparer)
+        {
+
+            List<BsonDocument> result;
+            FilterDefinition<BsonDocument> filter; 
+
+            switch (comparer)
+            {
+                case "<":
+                    filter = Builders<BsonDocument>.Filter.Lt(filterPair.Key, filterPair.Value);
+                    break;
+
+
+                case "<=":
+                    filter = Builders<BsonDocument>.Filter.Lte(filterPair.Key, filterPair.Value);
+                    break;
+
+                case ">":
+                    filter = Builders<BsonDocument>.Filter.Gt(filterPair.Key, filterPair.Value);
+                    break;
+
+                case ">=":
+                    filter = Builders<BsonDocument>.Filter.Gte(filterPair.Key, filterPair.Value);
+                    break;
+
+                default:
+                    filter = Builders<BsonDocument>.Filter.Eq(filterPair.Key, filterPair.Value);
+                    break;
+            }
+
+
+            //Builders<BsonDocument> 
+
+            switch (collectionName)
+            {
+                case "teachers":
+                    result = teachersCollection.Find(new BsonDocument()).ToList();
+
                     break;
 
 
