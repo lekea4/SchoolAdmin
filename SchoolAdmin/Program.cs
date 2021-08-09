@@ -9,8 +9,8 @@ using SchoolAdmin.Facilities.SchoolLibrary;
 using SchoolAdmin.MongoDBDemo;
 using MongoDB.Bson;
 using MongoDB.Driver;
-
-
+using SchoolAdmin.AdoDotnet;
+using SchoolAdmin.DTO;
 
 namespace SchoolAdmin
 {
@@ -24,32 +24,63 @@ namespace SchoolAdmin
         static void Main(string[] args)
         {
 
+            #region Working on SQLDataServices
 
+            SqlDataService sqlDbService = new SqlDataService();
+
+            //define and insert Teacher objects
+
+            TeacherDTO teacher1 = new TeacherDTO() { FirstName = "Adeleke", LastName = "Ayinde", MiddleName = "", Subject = "Physics" };
+            TeacherDTO teacher2 = new TeacherDTO() { FirstName = "Temi", LastName = "Tegbe", MiddleName = "Temitope", Subject = "Philosophy" };
+
+            //sqlDbService.Insert("teachers", teacher1);
+            //sqlDbService.Insert("teachers", teacher2);
+
+            //define and insert student objects
+            StudentDTO student1 = new StudentDTO() { FirstName = "Newman", LastName = "Philip", MiddleName = "Amadi", Level = "Senior" };
+            StudentDTO student2 = new StudentDTO() { FirstName = "Habeeb", LastName = "Olakitan", MiddleName = "", Level = "Senior" };
+
+            sqlDbService.Insert("students", student1);
+            sqlDbService.Insert("students", student2);
+
+            #endregion
 
             #region Working on MongoDB services
 
-             
+
             //instantiate the mongoDBservice class 
-            MongoDBService dBService = new MongoDBService();
+            //MongoDBService dBService = new MongoDBService();
+
+
+            //#region Using Update Filter 
+
+
+            //var filter = new KeyValuePair<string, object>("staff_id", 10003);
+            //var updateData = Builders<BsonDocument>.Update.Set("name", "Mathew Chiazor");
+
+
+
+
+            #endregion
 
 
             #region Using Sort
-            var dataSort = dBService.FetchUsingSort("students", "reg_number", "descending");
+            //var dataSort = dBService.FetchUsingSort("students", "reg_number", "descending");
 
 
-            Console.WriteLine("the data sorted are: ");
+            //Console.WriteLine("the data sorted are: ");
 
-            foreach (var data in dataSort)
-            {
-                Console.WriteLine(data);
-            }
+            //foreach (var data in dataSort)
+            //{
+            //    Console.WriteLine(data);
+            //}
 
             #endregion
 
             #region Using the filter method to fetch data 
 
-            //var filterPair = new KeyValuePair<string, object>("staff_id, 10001");
-            //var filteredTeachers = dBService.FetchWithFilter("teachers", filterPair , ">");
+            //var filterPair = new KeyValuePair<string, object>("staff_id", 10005);
+            //var filteredTeachers = dBService.FetchWithFilter("teachers", filterPair , ">=");
 
             //Console.WriteLine("The matching teachers for this query are: ");
             //foreach (var teacher in filteredTeachers)
@@ -57,7 +88,7 @@ namespace SchoolAdmin
             //    Console.WriteLine(teacher);
             //}
 
-            
+
 
 
 
@@ -156,7 +187,6 @@ namespace SchoolAdmin
 
             #endregion
 
-            #endregion
 
 
             #region previuosly worked on

@@ -32,7 +32,9 @@ namespace SchoolAdmin.MongoDBDemo
 
         }
 
-        
+      
+
+
 
         public void Insert(string collectionName, BsonDocument dataToInsert)
         {
@@ -155,6 +157,44 @@ namespace SchoolAdmin.MongoDBDemo
                     //include error message
 
 
+
+                    break;
+            }
+
+            return result;
+        }
+
+
+        public List<BsonDocument> UpdateWithFilter(string collectionName, KeyValuePair<string, object> filterPair, KeyValuePair<string, object>updateData)
+        {
+
+            List<BsonDocument> result;
+            
+            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq(filterPair.Key, filterPair.Value);
+
+
+
+
+
+            switch (collectionName)
+            {
+                case "teachers":
+                    result = teachersCollection.Find(new BsonDocument()).ToList();
+
+                    break;
+
+
+
+                case "students":
+
+                    result = studentsCollection.Find(new BsonDocument()).ToList();
+                    break;
+
+
+
+                default:
+                    result = null;
+                    Console.WriteLine("Invalid collection! Only 'teachers' and 'students' are allowed");
 
                     break;
             }
