@@ -162,13 +162,9 @@ namespace SchoolAdmin.MongoDBDemo
             return result;
         }
 
-
-
-        public List<BsonDocument> FetchWithFilter(string collectionName, KeyValuePair<string, object> filterPair, string comparer)
+        private FilterDefinition<BsonDocument> GetFilter(KeyValuePair<string, object>filterPair, string comparer)
         {
-
-            List<BsonDocument> result;
-            FilterDefinition<BsonDocument> filter; 
+            FilterDefinition<BsonDocument> filter;
 
             switch (comparer)
             {
@@ -194,8 +190,16 @@ namespace SchoolAdmin.MongoDBDemo
                     break;
             }
 
+            return filter;
 
-          
+        }
+
+
+        public List<BsonDocument> FetchWithFilter(string collectionName, KeyValuePair<string, object> filterPair, string comparer)
+        {
+
+            List<BsonDocument> result;
+            FilterDefinition<BsonDocument> filter = GetFilter(filterPair, comparer);
 
             switch (collectionName)
             {
@@ -221,6 +225,55 @@ namespace SchoolAdmin.MongoDBDemo
             }
 
             return result;
+        }
+
+        public void Update (string collectionName, KeyValuePair<string, object>filterPair, string Comparer, KeyValuePair<string, object> newData)
+        {
+            FilterDefinition<BsonDocument> filter = GetFilter(filterPair, Comparer);
+            UpdateDefinition<BsonDocument> update = Builders<BsonDocument>.Update.Set(newData.Key, newData.Value.ToString());
+
+            switch (collectionName)
+            {
+                case "teachers":
+                    teachersCollection.UpdateOne(filter, update);
+
+                    break;
+
+                case "students":
+
+                    studentsCollection.UpdateOne(filter, update);
+                    break;
+
+                default:
+                  
+                    Console.WriteLine("Invalid collection! Only 'teachers' and 'students' are allowed");
+
+                    break;
+            }
+        }
+
+        public void Delete(string collectionName, KeyValuePair<string, object>filterPair, string comparer)
+        {
+            FilterDefinition<BsonDocument> filter = GetFilter(filterPair, comparer);
+
+            switch (collectionName)
+            {
+                case "teachers":
+                    teachersCollection.DeleteOne(filter);
+
+                    break;
+
+                case "students":
+
+                    studentsCollection.DeleteOne(filter);
+                    break;
+
+                default:
+
+                    Console.WriteLine("Invalid collection! Only 'teachers' and 'students' are allowed");
+
+                    break;
+            }
         }
 
         public void TestConnection()

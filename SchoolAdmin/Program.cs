@@ -48,16 +48,21 @@ namespace SchoolAdmin
 
             #region Using the filter method to fetch data 
 
-            //var filterPair = new KeyValuePair<string, object>("staff_id, 10001");
-            //var filteredTeachers = dBService.FetchWithFilter("teachers", filterPair , ">");
+            KeyValuePair<string, object> filterPair = new KeyValuePair<string, object>("staff_id", 10006);
+            KeyValuePair<string, object> newData = new KeyValuePair<string, object>("name", "Mathew Chiazor");
+            //dBService.Update("teachers", filterPair, "=", newData);
 
-            //Console.WriteLine("The matching teachers for this query are: ");
-            //foreach (var teacher in filteredTeachers)
-            //{
-            //    Console.WriteLine(teacher);
-            //}
 
-            
+
+            dBService.Delete("teachers", filterPair, ">");
+            Console.WriteLine("The matching teachers for this query are: ");
+            var teachers = dBService.FetchAll("teachers");
+            foreach (var teacher in teachers)
+            {
+                Console.WriteLine(teacher);
+            }
+
+
 
 
 
