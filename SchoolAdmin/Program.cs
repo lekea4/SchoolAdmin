@@ -11,6 +11,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using SchoolAdmin.AdoDotnet;
 using SchoolAdmin.DTO;
+using SchoolAdmin.AdoDotnet.SqlDataService;
 
 namespace SchoolAdmin
 {
@@ -26,22 +27,38 @@ namespace SchoolAdmin
 
             #region Working on SQLDataServices
 
-            SqlDataService sqlDbService = new SqlDataService();
+            TeacherService teacherService = new TeacherService();
+            StudentService studentService = new StudentService();
 
             //define and insert Teacher objects
 
-            TeacherDTO teacher1 = new TeacherDTO() { FirstName = "Adeleke", LastName = "Ayinde", MiddleName = "", Subject = "Physics" };
-            TeacherDTO teacher2 = new TeacherDTO() { FirstName = "Temi", LastName = "Tegbe", MiddleName = "Temitope", Subject = "Philosophy" };
+            TeacherDTO teacher1 = new TeacherDTO() { FirstName = "Mustapha", LastName = "Rufai", MiddleName = "", Subject = "Javascript" };
+            TeacherDTO teacher2 = new TeacherDTO() { FirstName = "Frank", LastName = "Legborsi", MiddleName = "", Subject = "DevOps" };
+            TeacherDTO teacher3 = new TeacherDTO() { FirstName = "John", MiddleName = "Tony", LastName = "Ubi", Subject = "Product Design" };
+            TeacherDTO teacher4 = new TeacherDTO() { FirstName = "Tonia", MiddleName = "Seyi", LastName = "Adegbite", Subject = "Python" };
 
             //sqlDbService.Insert("teachers", teacher1);
             //sqlDbService.Insert("teachers", teacher2);
 
             //define and insert student objects
-            StudentDTO student1 = new StudentDTO() { FirstName = "Newman", LastName = "Philip", MiddleName = "Amadi", Level = "Senior" };
-            StudentDTO student2 = new StudentDTO() { FirstName = "Habeeb", LastName = "Olakitan", MiddleName = "", Level = "Senior" };
+            StudentDTO student1 = new StudentDTO() { FirstName = "Edith", LastName = "Philip", MiddleName = "Amadi", Level = "Senior" };
+            StudentDTO student2 = new StudentDTO() { FirstName = "Ajao", LastName = "Olakitan", MiddleName = "", Level = "Senior" };
 
-            sqlDbService.Insert("students", student1);
-            sqlDbService.Insert("students", student2);
+            //teacherService.Insert(teacher3);
+            //teacherService.Insert(teacher4);
+
+            //studentService.Insert(student1);
+            //studentService.Insert(student2);
+
+            List<StudentDTO> students = studentService.FetchAll();
+
+            
+
+
+
+
+
+
 
             #endregion
 
