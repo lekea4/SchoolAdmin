@@ -118,7 +118,7 @@ namespace SchoolAdmin.AdoDotnet.SqlDataService
 
         public void Update (KeyValuePair<string, object>filterPair, string comparer, StudentDTO newData)
         {
-            string filterString = "WHERE" + $"{filterPair.Key} {comparer} '{filterPair.Value}'";
+            string filterString = " WHERE " + $"{filterPair.Key} {comparer} '{filterPair.Value}'";
 
             string updateString = newData.FirstName == null ? "" : $"FirstName = '{newData.FirstName}',";
             updateString += newData.MiddleName == null ? "" : $"MiddleName = '{newData.MiddleName}',";
